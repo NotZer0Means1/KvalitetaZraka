@@ -13,6 +13,7 @@ class MySQLiDatabase {
         $this->password = $password;
         $this->database = $database;
 
+        $this->createDatabase();
         $this->connect();
     }
 
@@ -23,7 +24,7 @@ class MySQLiDatabase {
     }
 
     protected function connectNoDB(){ 
-        $this->MySQLi = new \MySQLi("localhost", null, null);
+        $this->MySQLi = new \MySQLi("localhost", "username", "password");
     }
 
     public function sendQuery($query) {
@@ -34,7 +35,7 @@ class MySQLiDatabase {
         return $result->fetch_array();
     }
 
-    public function createDatabase() {
+    private function createDatabase() {
         if($this->database === null) {
             $purityDB = "CREATE DATABASE kvalitetaZraka";
             $purityUser = "CREATE TABLE users (
@@ -46,9 +47,9 @@ class MySQLiDatabase {
                 id INT(3) UNSIGNED PRIMARY KEY,
                 station VARCHAR(30) NOT NULL
             )";
-            $purityType = "CREATE TABLE polutant (
+            $purityType = "CREATE TABLE polutants (
                 id INT(3) UNSIGNED PRIMARY KEY,
-                polution VARCHAR(30) NOT NULL
+                polutant VARCHAR(30) NOT NULL
             )";
             $this->connectNoDB();
             $this->sendQuery($purityDB);
@@ -56,10 +57,11 @@ class MySQLiDatabase {
             $this->sendQuery($purityStations);
             $this->sendQuery($purityType);
             $this->stationsDB();
+            $this->typeDB();
         } else return;
     }
 
-    public function stationsDB() {
+    private function stationsDB() {
         $stations = [
             173 => "Kaštel Sućurac",
             307 => "Dubrovnik",
@@ -79,6 +81,20 @@ class MySQLiDatabase {
         }
 
     }
+    private function typeDB(){
+        $polutants = [
+            1 => "Dušikov dioksid",
+            2 => "Sumporov dioksid",
+            3 => "Ugljikov monoksid",
+            4 => "Sumporovodik",
+            5 => "Lebdeće čestice"
+        ];
+        foreach($polutants as $polutant) {
+            $sql = "INSERT INTO polutants (id, polutant)
+                VALUES (".$polutant['id'].", ".$polutant['polutant'].")";
+            $this->sendQuery($sql); 
+        }
+    } 
 }
 
 ?>
