@@ -27,7 +27,32 @@ class MySQLiDatabase {
         return $result->fetch_array();
     }
 
-  
+    public function createDatabase() {
+        if($this->database === null) {
+            $purityDB = "CREATE DATABASE kvalitetaZraka";
+            $purityUser = "CREATE TABLE users (
+                id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(30) NOT NULL,
+                passwrd VARCHAR(30) NOT NULL
+            )";
+            $purityStations = "CREATE TABLE stations (
+                id INT(3) UNSIGNED PRIMARY KEY,
+                station VARCHAR(30) NOT NULL
+            )";
+            $purityType = "CREATE TABLE polutant (
+                id INT(3) UNSIGNED PRIMARY KEY,
+                polution VARCHAR(30) NOT NULL
+            )";
+            $this->sendQuary($purityDB);
+            $this->sendQuary($purityUser);
+            $this->sendQuary($purityStations);
+            $this->sendQuary($purityType);
+        } else return;
+    }
+
+    public function stationsDB() {
+
+    }
 }
 
 ?>
