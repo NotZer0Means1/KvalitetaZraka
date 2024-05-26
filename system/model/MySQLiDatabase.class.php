@@ -1,7 +1,7 @@
 <?php 
 class MySQLiDatabase {
 
-    public $mySQLi;
+    public $MySQLi;
     protected $host;
     protected $user;
     protected $database;
