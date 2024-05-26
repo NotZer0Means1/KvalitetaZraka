@@ -4,6 +4,7 @@ class MySQLiDatabase {
     public $MySQLi;
     protected $host;
     protected $user;
+    protected $password;
     protected $database;
 
     public function __construct($host, $user, $password, $database){
@@ -15,12 +16,18 @@ class MySQLiDatabase {
         $this->connect();
     }
 
+
+
     protected function connect(){
         $this->MySQLi = new \MySQLi($this->host, $this->user, $this->password, $this->database);
     }
 
-    public function sendQuary($quary) {
-        return $this->MySQLi->quary($quary);
+    protected function connectNoDB(){ 
+        $this->MySQLi = new \MySQLi("localhost", null, null);
+    }
+
+    public function sendQuery($query) {
+        return $this->MySQLi->query($query);
     }
 
     public function fetchArray($result = null) {
@@ -43,14 +50,33 @@ class MySQLiDatabase {
                 id INT(3) UNSIGNED PRIMARY KEY,
                 polution VARCHAR(30) NOT NULL
             )";
-            $this->sendQuary($purityDB);
-            $this->sendQuary($purityUser);
-            $this->sendQuary($purityStations);
-            $this->sendQuary($purityType);
+            $this->connectNoDB();
+            $this->sendQuery($purityDB);
+            $this->sendQuery($purityUser);
+            $this->sendQuery($purityStations);
+            $this->sendQuery($purityType);
+            $this->stationsDB();
         } else return;
     }
 
     public function stationsDB() {
+        $stations = [
+            173 => "Kaštel Sućurac",
+            307 => "Dubrovnik",
+            308 => "Karepovac",
+            255 => "Kopački rit",
+            161 => "Kutina",
+            257 => "Plitvička jezera",
+            168 => "Split",
+            127 => "Umag",
+            121 => "Velika gorica",
+            155 => "Zagreb"
+        ];
+        foreach($stations as $station) {
+            $sql = "INSERT INTO stations (id, station)
+                VALUES (".$station['id'].", ".$station['station'].")";
+            $this->sendQuery($sql); 
+        }
 
     }
 }
