@@ -13,6 +13,7 @@ class MySQLiDatabase {
         $this->password = $password;
         $this->database = $database;
 
+        $this->connect();
         $this->createDatabase();
     }
 
@@ -30,9 +31,7 @@ class MySQLiDatabase {
 
     private function createDatabase() {
 
-        $purityDB = "CREATE DATABASE " . $this->database;
-
-        $this->connect();
+        //$purityDB = "CREATE DATABASE " . $this->database;
 
         $purityUser = "CREATE TABLE users (
             id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -50,7 +49,7 @@ class MySQLiDatabase {
             polutant VARCHAR(30) NOT NULL
         )"; 
                   
-        $this->sendQuery($purityDB);
+        //$this->sendQuery($purityDB);
         $this->sendQuery($purityUser);
         $this->sendQuery($purityStations);
         $this->sendQuery($purityType);
@@ -72,10 +71,10 @@ class MySQLiDatabase {
             121 => "Velika gorica",
             155 => "Zagreb"
         ];
-        foreach($stations as $station) {
+        foreach($stations as $key => $value) {
             $sql = "INSERT INTO stations (id, station)
-                VALUES (".$station['id'].", ".$station['station'].")";
-            $this->sendQuery($sql); 
+                VALUES (".$key.", ".$value.")";
+            $this->sendQuery($sql);
         }
 
     }
@@ -87,12 +86,12 @@ class MySQLiDatabase {
             4 => "Sumporovodik",
             5 => "Lebdeće čestice"
         ];
-        foreach($polutants as $polutant) {
+        foreach($polutants as $key => $value) {
             $sql = "INSERT INTO polutants (id, polutant)
-                VALUES (".$polutant['id'].", ".$polutant['polutant'].")";
+                VALUES (".$key.", ".$value.")";
             $this->sendQuery($sql);
         }
-    } 
+    }
    
 }
 
