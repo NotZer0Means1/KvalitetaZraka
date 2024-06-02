@@ -1,8 +1,6 @@
 <?php
 
-include 'IndexPage.class.php';
-
-abstract class AbstaractPage
+abstract class AbstractPage
 {
     protected $templateName;
     protected $data = [];
@@ -19,7 +17,7 @@ abstract class AbstaractPage
     {
         $template = $this->templateName;
         $data = $this->data;
-        include_once('system/view/' . $template . '.tpl.php');
+        include_once("system/view/{$template}.tpl.php");
     }
 }
 

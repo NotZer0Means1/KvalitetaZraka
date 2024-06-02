@@ -1,13 +1,12 @@
 Dobrodosli u Aplikaciju KvalitetaZraka! <br> <br>
-
-<?php foreach ($resources as $key => $data) { ?>
+<?php foreach ($data['resources'] as $key => $resource) { ?>
     <strong>
         <?=$key?>
-        <?=$data['url']?>
+        <?=$resource['url']?>
     </strong>
     <br>
-    Metoda: <?=$data['method']?>
+    Metoda: <?=$resource['method']?>
     <br>
-    <?=$data['description']?>
+    <?=$resource['description']?>
     <br>
 <?php } ?>

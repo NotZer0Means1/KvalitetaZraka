@@ -2,9 +2,9 @@
 
 include 'AbstractPage.class.php';
 
-class IndexPage extends AbstaractPage
+class IndexPage extends AbstractPage
 {
-    public $templateName = 'index';
+    protected $templateName = 'Index';
 
     public function execute()
     {
@@ -24,7 +24,6 @@ class IndexPage extends AbstaractPage
                 'method' => 'POST',
                 'description' => 'Adds new city to the database. Required parameters: name, country'
             ]
-
         ];
 
         $this -> data = [
@@ -33,5 +32,6 @@ class IndexPage extends AbstaractPage
     }
 }
 
+$page = new IndexPage();
 
 ?>

@@ -1,7 +1,6 @@
 <?php 
 class MySQLiDatabase 
 {
-
     public $MySQLi;
     protected $host;
     protected $user;
@@ -43,8 +42,8 @@ class MySQLiDatabase
 
     private function createDatabase() 
     {
-
-        //$purityDB = "CREATE DATABASE " . $this->database;
+        // $purityDB = "CREATE DATABASE '$this->database'";
+        // $this->sendQuery($purityDB);
 
         if($this->checkExistance('users')->num_rows == 0)
         {
@@ -74,13 +73,11 @@ class MySQLiDatabase
             $this->sendQuery($purityType);
         }
                   
-        //$this->sendQuery($purityDB);
-
         $this->stationsDB();
         $this->typeDB();
     }
 
-    private function stationsDB() 
+    private function stationsDB()
     {
         $stations = [
             173 => "Kastel Sucurac",

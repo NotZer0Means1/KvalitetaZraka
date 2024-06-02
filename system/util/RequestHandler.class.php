@@ -5,7 +5,7 @@ class RequestHandler {
     public function __construct($className)
     {
         $className = $className . 'Page';
-        require_once('control/' . $className . '.class.php');
+        require_once("system/control/{$className}.class.php");
         new $className;
     }
 
