@@ -63,6 +63,7 @@ class MySQLiDatabase
                 station VARCHAR(30) NOT NULL
             )";
             $this->sendQuery($purityStations);
+            $this->stationsDB();
         }
 
         if($this->checkExistance('polutants')->num_rows == 0)
@@ -72,10 +73,11 @@ class MySQLiDatabase
                 polutant VARCHAR(30) NOT NULL
             )";
             $this->sendQuery($purityType);
+            $this->typeDB();
         }
                   
-        $this->stationsDB();
-        $this->typeDB();
+        
+        
     }
 
     private function stationsDB()
@@ -116,112 +118,130 @@ class MySQLiDatabase
     }
     
     public function insertStation($id, $station, $passwrd) {
-        $this->id = $id;
-        $this->station = $station;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $newId = $id;
+        $newStation = $station;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
         if ($this->sendQuery($check) == true) {
             $sql = "INSERT INTO stations (id, station)
-                values ('$id', '$station')";
+                values ('$newId', '$newStation')";
             $this->sendQuery($sql);
         }        
     }
 
     public function updateStationName($id, $station, $passwrd) {
-        $this->id = $id;
-        $this->station = $station;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkid = "SELECT id from stations where id ='$id'";
+        $newId = $id;
+        $newStation = $station;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+        $checkid = "SELECT id from stations where id ='$newId'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true) {
-                $edit = "UPDATE stations SET station='$station' where id='$id'";
+                $edit = "UPDATE stations SET station='$newStation' where id='$newId'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function updateStationId($id, $station, $passwrd) {
-        $this->id = $id;
-        $this->station = $station;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkstation = "SELECT id from stations where station ='$station'";
+        $newId = $id;
+        $newStation = $station;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+        $checkstation = "SELECT id from stations where station ='$newStation'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkstation) == true) {
-                $edit = "UPDATE stations SET id='$id' where station='$station'";
+                $edit = "UPDATE stations SET id='$newId' where station='$newStation'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function deleteStation($id, $station, $passwrd) {
-        $this->id = $id;
-        $this->station = $station;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkid = "SELECT id from stations where id ='$id'";
-        $checkstation = "SELECT station from stations where station = '$station'";
+        $newId = $id;
+        $newStation = $station;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+        $checkid = "SELECT id from stations where id ='$newId'";
+        $checkstation = "SELECT station from stations where station = '$newStation'";
         
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true && $this->sendQuery($checkstation) == true) {
-                $delete = "DELETE FROM stations where id='$id'";
+                $delete = "DELETE FROM stations where id='$newId'";
                 $this->sendQuery($delete);
             }
         }
     }
+    public function getStations() {
+        $getdata = "SELECT * FROM stations";
+        $data = $this->sendQuery($getdata);
+        $stations = [];
+        while($stations = $data->fetch_row()) {
+            $stations[] = $stations;
+        }
+        return $stations;
+    }
+
     public function insertPolutants($id, $polutant, $passwrd) {
-        $this->id = $id;
-        $this->polutant = $polutant;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $newId = $id;
+        $newPolutant = $polutant;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
         if ($this->sendQuery($check) == true) {
             $sql = "INSERT INTO polutants (id, polutant)
-                values ('$id', '$polutant')";
+                values ('$newId', '$newPolutant')";
             $this->sendQuery($sql);
         }        
     }
 
     public function updatePolutantName($id, $polutant, $passwrd) {
-        $this->id = $id;
-        $this->polutant = $polutant;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkid = "SELECT id from polutants where id ='$id'";
+        $newId = $id;
+        $newPolutant = $polutant;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+        $checkid = "SELECT id from polutants where id ='$newId'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true) {
-                $edit = "UPDATE polutants SET polutant='$polutant' where id='$id'";
+                $edit = "UPDATE polutants SET polutant='$newPolutant' where id='$newId'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function updatePolutantId($id, $polutant, $passwrd) {
-        $this->id = $id;
-        $this->polutant = $polutant;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkpolutant = "SELECT id from polutants where polutant ='$polutant'";
+        $newId = $id;
+        $newPolutant = $polutant;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+        $checkpolutant = "SELECT id from polutants where polutant ='$newPolutant'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkpolutant) == true) {
-                $edit = "UPDATE polutants SET id='$id' where polutant='$polutant'";
+                $edit = "UPDATE polutants SET id='$newId' where polutant='$newPolutant'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function deletePolutant($id, $polutant, $passwrd) {
-        $this->id = $id;
-        $this->polutant = $polutant;
-        $this->passwrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkid = "SELECT id from polutants where id ='$id'";
-        $checkpolutant = "SELECT polutant from polutants where polutant = '$polutant'";
+        $newId = $id;
+        $newPolutant = $polutant;
+        $newPasswrd = $passwrd;
+        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+        $checkid = "SELECT id from polutants where id ='$newId'";
+        $checkpolutant = "SELECT polutant from polutants where polutant = '$newPolutant'";
         
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true && $this->sendQuery($checkpolutant) == true) {
-                $delete = "DELETE FROM polutants where id='$id'";
+                $delete = "DELETE FROM polutants where id='$newId'";
                 $this->sendQuery($delete);
             }
         }
     }
-
+    public function getPolutant() {
+        $getdata = "SELECT * FROM polutants";
+        $data = $this->sendQuery($getdata);
+        $polutants = [];
+        while($polutants = $data->fetch_row()) {
+            $polutants[] = $polutants;
+        }
+        return $polutants;
+    }
 }
 
 ?>
