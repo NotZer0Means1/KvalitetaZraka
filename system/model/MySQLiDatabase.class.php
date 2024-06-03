@@ -63,6 +63,8 @@ class MySQLiDatabase
                 station VARCHAR(30) NOT NULL
             )";
             $this->sendQuery($purityStations);
+
+            $this->stationsDB();
         }
 
         if($this->checkExistance('polutants')->num_rows == 0)
@@ -72,10 +74,8 @@ class MySQLiDatabase
                 polutant VARCHAR(30) NOT NULL
             )";
             $this->sendQuery($purityType);
+            $this->typeDB();
         }
-                  
-        $this->stationsDB();
-        $this->typeDB();
     }
 
     private function stationsDB()
