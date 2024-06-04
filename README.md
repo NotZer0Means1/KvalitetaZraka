@@ -49,19 +49,25 @@ Api.tpl.php: Predložak za API odgovore.
 Index.tpl.php: Predložak za početnu stranicu.
 
 Upute za postavljanje i korištenje API-ja
+
 Postavljanje aplikacije
 Preuzimanje i raspakiravanje:
 Preuzmite ZIP datoteku projekta i raspakirajte je.
+
 Konfiguracija:
 Uredite datoteku system/config.inc.php s odgovarajućim postavkama baze podataka.
+
 Pokretanje:
 Postavite datoteke na vaš web poslužitelj (npr. Apache, Nginx).
 Provjerite jesu li sve potrebne PHP ekstenzije instalirane i omogućene (npr. MySQLi).
 Korištenje API-ja
+
 Endpoint: /api
 Metoda: GET
+
 Primjer zahtjeva:
 GET /api?location=Zagreb&date=2023-06-01&pollutant=PM10
+
 Primjer odgovora:
 {
   "location": "Zagreb",
