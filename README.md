@@ -1,2 +1,2 @@
-# KvalitetaZraka
-Project for web-programmnig
+Projekt "Kvaliteta Zraka"
+
