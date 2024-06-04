@@ -15,22 +15,39 @@ Opis arhitekture aplikacije
 Aplikacija je strukturirana u nekoliko ključnih modula:
 
 index.php: Glavna ulazna točka aplikacije koja usmjerava zahtjeve na odgovarajuće kontrolere.
+
 system/: Direktorij koji sadrži sve ključne komponente aplikacije.
+
 AppCore.class.php: Osnovna klasa aplikacije koja upravlja inicijalizacijom i osnovnim postavkama.
+
 config.inc.php: Konfiguracijske postavke aplikacije.
+
 core.functions.php: Zajedničke funkcije koje se koriste širom aplikacije.
+
 options.inc.php: Dodatne konfiguracijske opcije.
+
 control/: Direktorij koji sadrži kontrolere za različite stranice.
+
 AbstractPage.class.php: Apstraktna klasa za stranice.
+
 ApiPage.class.php: Kontroler za API stranice.
+
 IndexPage.class.php: Kontroler za početnu stranicu.
+
 model/: Direktorij koji sadrži klase za rad s bazom podataka.
+
 MySQLiDatabase.class.php: Klasa za interakciju s MySQL bazom podataka.
+
 util/: Direktorij koji sadrži pomoćne klase.
+
 RequestHandler.class.php: Klasa za rukovanje HTTP zahtjevima.
+
 view/: Direktorij koji sadrži predloške za prikaz stranica.
+
 Api.tpl.php: Predložak za API odgovore.
+
 Index.tpl.php: Predložak za početnu stranicu.
+
 Upute za postavljanje i korištenje API-ja
 Postavljanje aplikacije
 Preuzimanje i raspakiravanje:
