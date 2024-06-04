@@ -27,6 +27,13 @@ class AppCore
     {
         return self::$dbObj;
     }
+
+    //fake test
+    private static function sendError($msg)
+    {
+        //mail("vshevalev@aspira.hr","ERROR: ",$msg);
+           
+    }
 }
 
 ?>

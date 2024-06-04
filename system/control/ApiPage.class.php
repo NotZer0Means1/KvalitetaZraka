@@ -2,13 +2,12 @@
 
 include "AbstractPage.class.php";
 
-class ApiPage extends AbstractPage{
-
+class ApiPage extends AbstractPage
+{
     protected $templateName = "Api";
 
     public function execute()
     {
-
         $request = $_GET;
 
         $postaja = $request['postaja'];
