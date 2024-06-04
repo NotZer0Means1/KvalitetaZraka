@@ -11,8 +11,9 @@ Popis svih dostupnih resursa
 	location (string): Lokacija za koju se traže podaci.
 	date (string): Datum za koji se traže podaci (format YYYY-MM-DD).
 	pollutant (string): Vrsta zagađivača (opcionalno).
-	Opis arhitekture aplikacije
-	Aplikacija je strukturirana u nekoliko ključnih modula:
+
+Opis arhitekture aplikacije
+Aplikacija je strukturirana u nekoliko ključnih modula:
 
 index.php: Glavna ulazna točka aplikacije koja usmjerava zahtjeve na odgovarajuće kontrolere.
 system/: Direktorij koji sadrži sve ključne komponente aplikacije.
