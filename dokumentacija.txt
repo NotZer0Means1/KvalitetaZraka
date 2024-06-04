@@ -1,0 +1,80 @@
+Ovaj projekt omogućuje pristup podacima o kvaliteti zraka putem API-ja te pruža osnovne informacije putem početne stranice.
+
+Popis svih dostupnih resursa
+
+1. Index (Početna stranica)
+	Opis: Prikazuje osnovne informacije i uvod u aplikaciju.
+	Parametri: Nema specifičnih parametara.
+2. API
+	Opis: Omogućuje pristup podacima o kvaliteti zraka.
+	Parametri:
+	location (string): Lokacija za koju se traže podaci.
+	date (string): Datum za koji se traže podaci (format YYYY-MM-DD).
+	pollutant (string): Vrsta zagađivača (opcionalno).
+	Opis arhitekture aplikacije
+	Aplikacija je strukturirana u nekoliko ključnih modula:
+
+index.php: Glavna ulazna točka aplikacije koja usmjerava zahtjeve na odgovarajuće kontrolere.
+system/: Direktorij koji sadrži sve ključne komponente aplikacije.
+AppCore.class.php: Osnovna klasa aplikacije koja upravlja inicijalizacijom i osnovnim postavkama.
+config.inc.php: Konfiguracijske postavke aplikacije.
+core.functions.php: Zajedničke funkcije koje se koriste širom aplikacije.
+options.inc.php: Dodatne konfiguracijske opcije.
+control/: Direktorij koji sadrži kontrolere za različite stranice.
+AbstractPage.class.php: Apstraktna klasa za stranice.
+ApiPage.class.php: Kontroler za API stranice.
+IndexPage.class.php: Kontroler za početnu stranicu.
+model/: Direktorij koji sadrži klase za rad s bazom podataka.
+MySQLiDatabase.class.php: Klasa za interakciju s MySQL bazom podataka.
+util/: Direktorij koji sadrži pomoćne klase.
+RequestHandler.class.php: Klasa za rukovanje HTTP zahtjevima.
+view/: Direktorij koji sadrži predloške za prikaz stranica.
+Api.tpl.php: Predložak za API odgovore.
+Index.tpl.php: Predložak za početnu stranicu.
+
+Upute za postavljanje i korištenje API-ja
+Postavljanje aplikacije
+Preuzimanje i raspakiravanje:
+	Preuzmite ZIP datoteku projekta i raspakirajte je.
+Konfiguracija:
+	Uredite datoteku system/config.inc.php s odgovarajućim postavkama baze podataka.
+Pokretanje:
+	Postavite datoteke na vaš web poslužitelj (npr. Apache, Nginx).
+	Provjerite jesu li sve potrebne PHP ekstenzije instalirane i omogućene (npr. MySQLi).
+Korištenje API-ja
+Endpoint: /api
+Metoda: GET
+Primjer zahtjeva:
+
+GET /api?location=Zagreb&date=2023-06-01&pollutant=PM10
+
+Primjer odgovora:
+
+{
+  "location": "Zagreb",
+  "date": "2023-06-01",
+  "pollutants": {
+    "PM10": "45 µg/m³",
+    "NO2": "30 µg/m³"
+  }
+}
+Izvještaji o testiranju
+Testiranje je provedeno kroz sljedeće korake:
+
+Jedinično testiranje:
+
+Testirani su pojedinačni moduli i funkcije kako bi se osigurala njihova ispravnost.
+Korišteni su lažni podaci za testiranje svih funkcionalnosti API-ja.
+
+Integracijsko testiranje:
+
+Provjereno je kako različiti moduli međusobno komuniciraju.
+Testirano je nekoliko slučajeva korištenja za različite kombinacije parametara API-ja.
+
+Sustavno testiranje:
+
+Cjelokupna aplikacija je testirana u okruženju koje simulira produkciju.
+Provjereno je učitavanje početne stranice i ispravan rad svih funkcionalnosti API-ja.
+Regresijsko testiranje:
+
+Testirano je nakon svake promjene koda kako bi se osiguralo da nove promjene ne uvode greške.
