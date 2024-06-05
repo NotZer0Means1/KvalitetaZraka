@@ -75,6 +75,21 @@ class MySQLiDatabase
             $this->sendQuery($purityType);
             $this->typeDB();
         }
+
+        if($this->checkExistance("data")->num_rows == 0) 
+        {
+            $purityData = "CREATE TABLE purityData (
+                id INT (11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                id_station INT (3) NOT NULL,
+                id_polutant INT (3) NOT NULL,
+                vrijednost VARCHAR(255) NOT NULL,
+                mjernaJedinica VARCHAR (255) NOT NULL,
+                vrijeme INT (13) NOT NULL,
+                FOREIGN KEY (id_station) REFERENCES stations (id),
+                FOREIGN KEY (id_polutant) REFERENCES polutant (id)
+            )";
+            $this->sendQuery($purityData);
+        }
                   
         
         
@@ -241,6 +256,27 @@ class MySQLiDatabase
             $polutants[] = $polutants;
         }
         return $polutants;
+    }
+
+    public function insertData ($station, $polutant, $value, $mesurements, $time) {
+        $stationId = $station;
+        $polutantId = $polutant;
+        $valueNum = $value;
+        $mesurmentType = $mesurements;
+        $timeOf = $time;
+        $inserting = "INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)ž
+            VALUES ('$stationId', '$polutantId', '$valueNum', '$mesurmentType', '$timeOf')";
+        $this->sendQuery($inserting);
+
+    }
+    public function getData() {
+        $getData = "SELECT * FROM purityData";
+        $data = $this->sendQuery($getData);
+        $fullData = [];
+        while($fullData = $data->fetch_row()) {
+            $fullData[] = $fullData;
+        }
+        return $fullData;
     }
 }
 
