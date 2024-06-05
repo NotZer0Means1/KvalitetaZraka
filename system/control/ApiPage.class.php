@@ -1,7 +1,6 @@
 <?php
 
 include "AbstractPage.class.php";
-include 'AppCore.class.php';
 
 class ApiPage extends AbstractPage
 {
@@ -53,12 +52,12 @@ class ApiPage extends AbstractPage
             'resources' => $resources
         ];
 
+        require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
         foreach($this->data['resources'] as $key => $resource)
         {
             $dbObj->insertData($postaja, $polutant, $resource['vrijednost'], $resource['mjernaJedinica'], $resource['vrijeme']);
         }
-
     }
 
 }

@@ -1,9 +1,8 @@
 <?php
 
 include 'AbstractPage.class.php';
-include 'AppCore.class.php';
 
-class CityPage extends AbstractPage
+class AddCityPage extends AbstractPage
 {
     protected $templateName = 'AddCity';
 
@@ -16,8 +15,9 @@ class CityPage extends AbstractPage
         $postaja = $request['postaja'];
         $password = $request['password'];
 
+        require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
-        
+
         $dbObj->insertStation($id, $postaja, $password);
 
     }
