@@ -23,7 +23,7 @@ class AppCore
 
     }
 
-    protected static final function getDB()
+    public static final function getDB()
     {
         return self::$dbObj;
     }
