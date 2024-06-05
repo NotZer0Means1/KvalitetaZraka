@@ -12,13 +12,12 @@ class ReadCityPage extends AbstractPage
     {
         $request = $_GET;
         $id = $request['id'];
-        $postaja = $request['postaja'];
         $password = $request['password'];
 
         require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
 
-        $dbObj->readStation($id, $postaja, $password);
+        $dbObj->readStation($id, $password);
 
     }
 }

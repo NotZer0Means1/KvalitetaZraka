@@ -261,6 +261,18 @@ class MySQLiDatabase
         }
         return $fullData;
     }
+
+    public function readStation ($station, $passwrd) 
+    {
+        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE = :passwrd");
+        if($pass->execute([$passwrd]) == true) 
+        {
+            $check = $this->MySQLi->prepare("SELECT vrijednost, mjernaJedinica, vrijeme FROM purityData WHERE = :id_station");
+            $check->execute([':id_station' => $station]);
+            $result = $check->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+    }
 }
 
 ?>
