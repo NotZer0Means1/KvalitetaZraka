@@ -133,54 +133,46 @@ class MySQLiDatabase
     }
     
     public function insertStation($id, $station, $passwrd) {
-        $newId = $id;
-        $newStation = $station;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
         if ($this->sendQuery($check) == true) {
             $sql = "INSERT INTO stations (id, station)
-                values ('$newId', '$newStation')";
+                values ('$id', '$station')";
             $this->sendQuery($sql);
         }        
     }
 
     public function updateStationName($id, $station, $passwrd) {
-        $newId = $id;
-        $newStation = $station;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
-        $checkid = "SELECT id from stations where id ='$newId'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $checkid = "SELECT id from stations where id ='$id'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true) {
-                $edit = "UPDATE stations SET station='$newStation' where id='$newId'";
+                $edit = "UPDATE stations SET station='$station' where id='$id'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function updateStationId($id, $station, $passwrd) {
-        $newId = $id;
-        $newStation = $station;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
-        $checkstation = "SELECT id from stations where station ='$newStation'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $checkstation = "SELECT id from stations where station ='$station'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkstation) == true) {
-                $edit = "UPDATE stations SET id='$newId' where station='$newStation'";
+                $edit = "UPDATE stations SET id='$id' where station='$station'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function deleteStation($id, $station, $passwrd) {
-        $newId = $id;
-        $newStation = $station;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
-        $checkid = "SELECT id from stations where id ='$newId'";
-        $checkstation = "SELECT station from stations where station = '$newStation'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $checkid = "SELECT id from stations where id ='$id'";
+        $checkstation = "SELECT station from stations where station = '$station'";
         
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true && $this->sendQuery($checkstation) == true) {
-                $delete = "DELETE FROM stations where id='$newId'";
+                $delete = "DELETE FROM stations where id='$id'";
                 $this->sendQuery($delete);
             }
         }
@@ -196,54 +188,46 @@ class MySQLiDatabase
     }
 
     public function insertPolutants($id, $polutant, $passwrd) {
-        $newId = $id;
-        $newPolutant = $polutant;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
         if ($this->sendQuery($check) == true) {
             $sql = "INSERT INTO polutants (id, polutant)
-                values ('$newId', '$newPolutant')";
+                values ('$id', '$polutant')";
             $this->sendQuery($sql);
         }        
     }
 
     public function updatePolutantName($id, $polutant, $passwrd) {
-        $newId = $id;
-        $newPolutant = $polutant;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
-        $checkid = "SELECT id from polutants where id ='$newId'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $checkid = "SELECT id from polutants where id ='$id'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true) {
-                $edit = "UPDATE polutants SET polutant='$newPolutant' where id='$newId'";
+                $edit = "UPDATE polutants SET polutant='$polutant' where id='$id'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function updatePolutantId($id, $polutant, $passwrd) {
-        $newId = $id;
-        $newPolutant = $polutant;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
-        $checkpolutant = "SELECT id from polutants where polutant ='$newPolutant'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $checkpolutant = "SELECT id from polutants where polutant ='$polutant'";
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkpolutant) == true) {
-                $edit = "UPDATE polutants SET id='$newId' where polutant='$newPolutant'";
+                $edit = "UPDATE polutants SET id='$id' where polutant='$polutant'";
                 $this->sendQuery($edit);
             }
         }
     }
     public function deletePolutant($id, $polutant, $passwrd) {
-        $newId = $id;
-        $newPolutant = $polutant;
-        $newPasswrd = $passwrd;
-        $check = "SELECT passwrd from users where passwrd='$newPasswrd'";
-        $checkid = "SELECT id from polutants where id ='$newId'";
-        $checkpolutant = "SELECT polutant from polutants where polutant = '$newPolutant'";
+
+        $check = "SELECT passwrd from users where passwrd='$passwrd'";
+        $checkid = "SELECT id from polutants where id ='$id'";
+        $checkpolutant = "SELECT polutant from polutants where polutant = '$polutant'";
         
         if ($this->sendQuery($check) == true) {
             if ($this->sendQuery($checkid) == true && $this->sendQuery($checkpolutant) == true) {
-                $delete = "DELETE FROM polutants where id='$newId'";
+                $delete = "DELETE FROM polutants where id='$id'";
                 $this->sendQuery($delete);
             }
         }
@@ -259,13 +243,9 @@ class MySQLiDatabase
     }
 
     public function insertData ($station, $polutant, $value, $mesurements, $time) {
-        $stationId = $station;
-        $polutantId = $polutant;
-        $valueNum = $value;
-        $mesurmentType = $mesurements;
-        $timeOf = $time;
-        $inserting = "INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)ž
-            VALUES ('$stationId', '$polutantId', '$valueNum', '$mesurmentType', '$timeOf')";
+
+        $inserting = "INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
+            VALUES ('$station', '$polutant', '$value', '$mesurements', '$time')";
         $this->sendQuery($inserting);
 
     }
