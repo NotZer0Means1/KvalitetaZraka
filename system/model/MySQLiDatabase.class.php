@@ -76,17 +76,17 @@ class MySQLiDatabase
             $this->typeDB();
         }
 
-        if($this->checkExistance("data")->num_rows == 0) 
+        if($this->checkExistance('purityData')->num_rows == 0)
         {
             $purityData = "CREATE TABLE purityData (
-                id INT (11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                id_station INT (3) NOT NULL,
-                id_polutant INT (3) NOT NULL,
+                id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                id_station INT(3) UNSIGNED,
+                id_polutant INT(3) UNSIGNED,
                 vrijednost VARCHAR(255) NOT NULL,
-                mjernaJedinica VARCHAR (255) NOT NULL,
-                vrijeme INT (13) NOT NULL,
-                FOREIGN KEY (id_station) REFERENCES stations (id),
-                FOREIGN KEY (id_polutant) REFERENCES polutant (id)
+                mjernaJedinica VARCHAR(10) NOT NULL,
+                vrijeme VARCHAR (13)NOT NULL,
+                FOREIGN KEY (id_station) REFERENCES stations(id),
+                FOREIGN KEY (id_polutant) REFERENCES polutants(id)
             )";
             $this->sendQuery($purityData);
         }
