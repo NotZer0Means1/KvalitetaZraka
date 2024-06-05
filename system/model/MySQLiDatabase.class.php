@@ -90,9 +90,6 @@ class MySQLiDatabase
             )";
             $this->sendQuery($purityData);
         }
-                  
-        
-        
     }
 
     private function stationsDB()
@@ -242,11 +239,17 @@ class MySQLiDatabase
         return $polutants;
     }
 
-    public function insertData ($station, $polutant, $value, $mesurements, $time) {
+    public function insertData ($station, $polutant, $val, $mesurements, $seconds) {
 
-        $inserting = "INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
-            VALUES ('$station', '$polutant', '$value', '$mesurements', '$time')";
-        $this->sendQuery($inserting);
+        $inserting = $this->MySQLi->prepare("INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
+            VALUES (:station, :polutant, :val, :mesurements, :seconds)");
+        $inserting->execute([
+            ':station' => $station,
+            ':polutant' => $polutant,
+            ':val' => $val,
+            ':mesurments' => $mesurements,
+            ':seconds' =>  $seconds
+        ]);
 
     }
     public function getData() {
