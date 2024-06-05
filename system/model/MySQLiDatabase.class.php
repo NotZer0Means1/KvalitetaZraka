@@ -86,7 +86,7 @@ class MySQLiDatabase
                 mjernaJedinica VARCHAR (255) NOT NULL,
                 vrijeme INT (13) NOT NULL,
                 FOREIGN KEY (id_station) REFERENCES stations (id),
-                FOREIGN KEY (id_polutant) REFERENCES polutant (id)
+                FOREIGN KEY (id_polutant) REFERENCES polutants (id)
             )";
             $this->sendQuery($purityData);
         }
