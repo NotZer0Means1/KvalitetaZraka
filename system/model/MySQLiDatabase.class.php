@@ -140,6 +140,7 @@ class MySQLiDatabase
             VALUES (id = ?, station = ?)");
             $insertStation ->bind_param("is", $id, $station);
             $insertStation -> execute();
+            $insertStation -> close();
         }     
     }
 
