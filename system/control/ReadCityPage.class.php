@@ -17,7 +17,7 @@ class ReadCityPage extends AbstractPage
         require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
 
-        $resources = $dbObj->readStation($id, $password);
+        $resources = $dbObj->readStation($id, htmlspecialchars($password, ENT_QUOTES, 'UTF-8'));
         $this -> data = [
             'resources' => $resources
         ];

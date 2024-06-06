@@ -18,8 +18,8 @@ class UpdateCityNamePage extends AbstractPage
         require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
 
-        $dbObj->updateStationName($id, $postaja, $password);
-
+        $dbObj->updateStationName($id, htmlspecialchars($postaja, ENT_QUOTES, 'UTF-8'), htmlspecialchars($password, ENT_QUOTES, 'UTF-8'));
+        
     }
 }
 
