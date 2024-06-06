@@ -152,12 +152,18 @@ class MySQLiDatabase
     }
     public function updateStationId($id, $station, $passwrd) {
 
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkstation = "SELECT id from stations where station ='$station'";
-        if ($this->sendQuery($check) == true) {
-            if ($this->sendQuery($checkstation) == true) {
-                $edit = "UPDATE stations SET id='$id' where station='$station'";
-                $this->sendQuery($edit);
+        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass -> bind_param("s", $passwrd);
+        $pass->execute();
+        if($pass->get_result())
+        {
+            $checkid = $this->MySQLi->prepare("SELECT id FROM stations WHERE station = ?");
+            $checkid -> bind_param("s", $station);
+            $checkid -> execute();
+            if($checkid->get_result()) {
+                $updateid = $this->MySQLi->prepare("UPDATE stations SET id= ? WHERE station = ?");
+                $updateid -> bind_param("is", $id, $station);
+                $updateid -> execute();
             }
         }
     }
