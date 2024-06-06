@@ -131,12 +131,19 @@ class MySQLiDatabase
     
     public function insertStation($id, $station, $passwrd) {
 
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        if ($this->sendQuery($check) == true) {
-            $sql = "INSERT INTO stations (id, station)
-                values ('$id', '$station')";
-            $this->sendQuery($sql);
-        }        
+        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass -> bind_param("s", $passwrd);
+        $pass->execute();
+        if($pass->get_result())
+        {
+            $insertStation = $this->MySQLi->prepare("INSERT INTO stations (id, station)
+            VALUES (:id, :station)");
+            $insertStation ->execute([
+                ":id"=> $id,
+                ":station"=> $station
+            ]);
+            $insertStation -> execute();
+        }     
     }
 
     public function updateStationName($id, $station, $passwrd) {
@@ -150,7 +157,7 @@ class MySQLiDatabase
             $checkname -> bind_param("i", $id);
             $checkname -> execute();
             if($checkname->get_result()) {
-                $updatename = $this->MySQLi->prepare("UPDATE stations SET stetion = ? WHERE id = ?");
+                $updatename = $this->MySQLi->prepare("UPDATE stations SET station = ? WHERE id = ?");
                 $updatename -> bind_param("si", $station, $id);
                 $updatename -> execute();
             }
