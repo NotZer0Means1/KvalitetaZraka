@@ -142,7 +142,6 @@ class MySQLiDatabase
                 ":id"=> $id,
                 ":station"=> $station
             ]);
-            $insertStation -> execute();
         }     
     }
 
