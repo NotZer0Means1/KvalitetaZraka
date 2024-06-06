@@ -16,7 +16,7 @@ class IndexPage extends AbstractPage
             ],
             2 => [
                 'url' => 'AddCity',
-                'method' => '?page=DeleteCity&id=777&postaja=INOT&password=1234',
+                'method' => '?page=AddCity&id=777&postaja=INOT&password=1234',
                 'description' => 'Dodvanje grada u bazu podataka'
             ],
             3 => [
