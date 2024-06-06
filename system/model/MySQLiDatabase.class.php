@@ -278,14 +278,10 @@ class MySQLiDatabase
     public function insertData ($station, $polutant, $val, $mesurements, $seconds) {
 
         $inserting = $this->MySQLi->prepare("INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
-            VALUES (:station, :polutant, :val, :mesurements, :seconds)");
-        $inserting->execute([
-            ':station' => $station,
-            ':polutant' => $polutant,
-            ':val' => $val,
-            ':mesurments' => $mesurements,
-            ':seconds' =>  $seconds
-        ]);
+            VALUES (?, ?, ?, ?, ?)");
+        $inserting->bind_param("iisss", $station, $polutant, $val, $mesurements, $seconds);
+        $inserting->execute();
+        $inserting->close();
 
     }
     public function getData() {
