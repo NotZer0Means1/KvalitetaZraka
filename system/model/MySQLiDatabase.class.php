@@ -163,15 +163,25 @@ class MySQLiDatabase
     }
     public function deleteStation($id, $station, $passwrd) {
 
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkid = "SELECT id from stations where id ='$id'";
-        $checkstation = "SELECT station from stations where station = '$station'";
-        
-        if ($this->sendQuery($check) == true) {
-            if ($this->sendQuery($checkid) == true && $this->sendQuery($checkstation) == true) {
-                $delete = "DELETE FROM stations where id='$id'";
-                $this->sendQuery($delete);
+        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass -> bind_param("s", $passwrd);
+        $pass->execute();
+        if($pass->get_result())
+        {
+            $checkid = $this->MySQLi->prepare("SELECT id FROM stations WHERE id = ?");
+            $checkid -> bind_param("i", $id);
+            $checkid -> execute();
+            if($checkid->get_result()){
+                $checkstation = $this->MySQLi->prepare("SELECT station FROM stations WHERE station = ?");
+                $checkstation -> bind_param("s", $station);
+                $checkstation -> execute();
+                if($checkstation->get_result()) {
+                    $delete = $this->MySQLi->prepare("DELETE FROM stations WHERE id = ?");
+                    $delete -> bind_param("i", $id);
+                    $delete -> execute();
+                }
             }
+
         }
     }
     public function getStations() {
