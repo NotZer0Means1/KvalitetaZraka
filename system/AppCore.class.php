@@ -1,9 +1,10 @@
 <?php
-
+require_once('core.functions.php');
 class AppCore
 {
     protected static $dbObj = null;
 
+    protected static $num = 0;
 
     public function __construct()
     {
@@ -11,6 +12,30 @@ class AppCore
 
         require_once('util/RequestHandler.class.php');
         RequestHandler::handle();
+    }
+    static function exceptionHandle()
+    {
+        AppCore::$num++;
+    
+        if(AppCore::$num<=1)
+        {
+                echo "<br>FATAL ERROR exceptionHandle <br>";
+                require_once('view/error.tpl.php');
+                header("HTTP/1.1 404 NOT FOUND FATAL ERROR exceptionHandle");}
+
+        else
+        {
+
+        }
+      
+    }
+    public static function errorExceptionHandle($ernumber,$errname,$errPage,$eLast)
+    {
+            $message= "WARNING >[$errname]<br>---[$errPage]<br>--ON LINE----[$eLast]<br>";
+            AppCore::sendError($message);
+            echo "<br>ERROR WARNING errorExceptionHandle <br>";
+            require_once('view/error.tpl.php');
+            header("HTTP/1.1 405 ERROR WARNING errorExceptionHandle");
     }
 
     protected function initDB()

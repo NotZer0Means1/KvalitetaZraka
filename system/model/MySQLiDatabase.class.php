@@ -264,11 +264,14 @@ class MySQLiDatabase
 
     public function readStation ($station, $passwrd) 
     {
-        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE = :passwrd");
-        if($pass->execute([$passwrd]) == true) 
+        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass -> bind_param("s", $passwrd);
+        $pass->execute();
+        if($pass->get_result())
         {
-            $check = $this->MySQLi->prepare("SELECT vrijednost, mjernaJedinica, vrijeme FROM purityData WHERE = :id_station");
-            $check->execute([':id_station' => $station]);
+            $check = $this->MySQLi->prepare("SELECT vrijednost, mjernaJedinica, vrijeme FROM purityData WHERE id_station = ?");
+            $check->bind_param("i", $station);
+            $check->execute();
             $result = $check->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
         }

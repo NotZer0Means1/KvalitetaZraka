@@ -23,4 +23,6 @@ class DeleteCityPage extends AbstractPage
     }
 }
 
+$page = new DeleteCityPage();
+
 ?>

@@ -23,4 +23,6 @@ class UpdateCityIdPage extends AbstractPage
     }
 }
 
+$page = new UpdateCityIdPage();
+
 ?>
