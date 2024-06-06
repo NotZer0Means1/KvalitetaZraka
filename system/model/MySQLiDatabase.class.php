@@ -137,11 +137,9 @@ class MySQLiDatabase
         if($pass->get_result())
         {
             $insertStation = $this->MySQLi->prepare("INSERT INTO stations (id, station)
-            VALUES (:id, :station)");
-            $insertStation ->execute([
-                ":id"=> $id,
-                ":station"=> $station
-            ]);
+            VALUES (id = ?, station = ?)");
+            $insertStation ->bind_param("is", $id, $station);
+            $insertStation -> execute();
         }     
     }
 
