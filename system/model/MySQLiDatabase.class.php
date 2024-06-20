@@ -310,7 +310,17 @@ class MySQLiDatabase
             $check->bind_param("i", $station);
             $check->execute();
             $result = $check->get_result();
-            return $result->fetch_all(MYSQLI_ASSOC);
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $finalres = [];
+            foreach($data as $row){
+                $finalres[] = [
+                    'vrijednost' => htmlspecialchars($row['vrijednost']),
+                    'mjernaJedinica' => htmlspecialchars($row['mjernaJedinica']),
+                    'vrijeme'=> htmlspecialchars($row['vrijeme'])
+                ];
+            }
+            return $finalres;
+
         }
     }
 }
