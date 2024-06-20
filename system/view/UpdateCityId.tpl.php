@@ -1,1 +1,7 @@
-City je update-an by ID
+<?php
+print http_response_code(200);?>
+<br>
+<br>
+<?php
+echo "City je update-an by ID";
+?>

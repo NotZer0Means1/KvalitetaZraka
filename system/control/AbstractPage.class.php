@@ -1,5 +1,5 @@
 <?php
-
+// dependency injection with every class in this folder
 abstract class AbstractPage
 {
     protected $templateName;
@@ -18,6 +18,16 @@ abstract class AbstractPage
         $template = $this->templateName;
         $data = $this->data;
         include_once("system/view/{$template}.tpl.php");
+    }
+
+    public function printJSON($data)
+    {
+        return json_encode($data);
+    }
+
+    public function printXML($data)
+    {
+        
     }
 }
 

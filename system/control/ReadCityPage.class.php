@@ -13,11 +13,16 @@ class ReadCityPage extends AbstractPage
         $request = $_GET;
         $id = $request['id'];
         $password = $request['password'];
+        $method = $request['method'];
 
         require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
 
-        $resources = $dbObj->readStation($id, htmlspecialchars($password, ENT_QUOTES, 'UTF-8'));
+        $resources = $dbObj->readStation($id, $password);
+        if ($method == 'json')
+            $resources = $this->printJSON($resources);
+        else
+            $resources = $this->printXML($resources);
         $this -> data = [
             'resources' => $resources
         ];

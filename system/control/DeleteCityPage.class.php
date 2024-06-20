@@ -18,7 +18,7 @@ class DeleteCityPage extends AbstractPage
         require_once("system/AppCore.class.php");
         $dbObj = AppCore::getDB();
 
-        $dbObj->deleteStation($id, htmlspecialchars($postaja, ENT_QUOTES, 'UTF-8'), htmlspecialchars($password, ENT_QUOTES, 'UTF-8'));
+        $dbObj->deleteStation($id, $postaja, $password);
 
 
     }

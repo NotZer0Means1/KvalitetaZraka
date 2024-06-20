@@ -207,7 +207,6 @@ class MySQLiDatabase
                     $delete -> execute();
                 }
             }
-
         }
     }
     public function getStations() {
