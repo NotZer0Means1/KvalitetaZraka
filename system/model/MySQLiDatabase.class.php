@@ -212,10 +212,15 @@ class MySQLiDatabase
     }
     public function getStations() {
         $getdata = "SELECT * FROM stations";
-        $data = $this->sendQuery($getdata);
+        $sqldef = $this->MySQLi->prepare($getdata);
+        $sqldef -> execute();
+        $data = $sqldef -> get_result();
         $stations = [];
-        while($stations = $data->fetch_row()) {
-            $stations[] = $stations;
+        while($stations = $data->fetch_assoc()) {
+            $xssdef = array_map(function($station) {
+                return htmlspecialchars($station, ENT_QUOTES, 'UTF-8');
+            }, $stations);
+            $stations[] = $xssdef;
         }
         return $stations;
     }
@@ -276,7 +281,7 @@ class MySQLiDatabase
     }
 
     public function insertData ($station, $polutant, $val, $mesurements, $seconds) {
-
+        
         $inserting = $this->MySQLi->prepare("INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
             VALUES (?, ?, ?, ?, ?)");
         $inserting->bind_param("iisss", $station, $polutant, $val, $mesurements, $seconds);
