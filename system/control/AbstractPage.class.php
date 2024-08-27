@@ -1,5 +1,5 @@
 <?php
-// dependency injection with every class in this folder
+// open closed princip
 abstract class AbstractPage
 {
     protected $templateName;
@@ -27,7 +27,7 @@ abstract class AbstractPage
 
     public function printXML($data)
     {
-        
+
     }
 }
 

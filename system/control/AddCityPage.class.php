@@ -1,5 +1,5 @@
 <?php
-
+// primjer open-closed principa
 include 'AbstractPage.class.php';
 
 class AddCityPage extends AbstractPage
@@ -15,10 +15,12 @@ class AddCityPage extends AbstractPage
         $postaja = $request['postaja'];
         $password = $request['password'];
 
-        require_once("system/AppCore.class.php");
-        $dbObj = AppCore::getDB();
+        //require_once("system/AppCore.class.php");
 
-        $dbObj->insertStation($id, $postaja, $password);
+        AppCore::getDB()->insertStation($id, $postaja, $password);
     }
 }
+
+$page = new AddCityPage();
+// kreirat funkciju insert station
 ?>

@@ -92,7 +92,7 @@ class MySQLiDatabase
         }
     }
 
-    private function stationsDB()
+    private function stationsDB() // u controller / ali bolje kreirat posebni model za grad
     {
         $stations = [
             173 => "Kastel Sucurac",
@@ -113,7 +113,7 @@ class MySQLiDatabase
         }
     }
 
-    private function typeDB()
+    private function typeDB() // isto posebni model // dio grada
     {
         $polutants = [
             1 => "Dušikov dioksid",
@@ -129,7 +129,7 @@ class MySQLiDatabase
         }
     }
     
-    public function insertStation($id, $station, $passwrd) {
+    public function insertStation($id, $station, $passwrd) { // model postoja
 
         $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);

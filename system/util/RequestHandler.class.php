@@ -1,5 +1,5 @@
 <?php
-
+require_once 'AbstractPage.class.php';
 class RequestHandler {
 
     public function __construct($className)
