@@ -1,4 +1,7 @@
 <?php 
+
+namespace System\Model\PolutantsModel;
+use System\Model\AbstractModel;
 class PolutantsModel extends AbstractModel 
 {
     public function insertPolutants($id, $polutant, $passwrd) {

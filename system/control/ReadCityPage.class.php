@@ -2,6 +2,7 @@
 
 include 'AbstractPage.class.php';
 
+use System\Model\PurityModel\PurityModel;
 class ReadCityPage extends AbstractPage
 {
     protected $templateName = 'ReadCity';
@@ -15,10 +16,9 @@ class ReadCityPage extends AbstractPage
         $password = $request['password'];
         $method = $request['method'];
 
-        require_once("system/AppCore.class.php");
-        $dbObj = AppCore::getDB();
+        $city = new PurityModel();
 
-        $resources = $dbObj->readStation($id, $password);
+        $resources = $city->readStation($id, $password);
         if ($method == 'json')
             $resources = $this->printJSON($resources);
         else

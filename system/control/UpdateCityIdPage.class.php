@@ -2,6 +2,8 @@
 
 include 'AbstractPage.class.php';
 
+use System\Model\CityModel\CityModel;
+
 class UpdateCityIdPage extends AbstractPage
 {
     protected $templateName = 'UpdateCityId';
@@ -15,11 +17,9 @@ class UpdateCityIdPage extends AbstractPage
         $postaja = $request['postaja'];
         $password = $request['password'];
 
-        require_once("system/AppCore.class.php");
-        $dbObj = AppCore::getDB();
+        $city = new CityModel();
 
-        $dbObj->updateStationId($id, $postaja, $password);
-
+        $city->updateStationId($id, $postaja, $password);
 
     }
 }

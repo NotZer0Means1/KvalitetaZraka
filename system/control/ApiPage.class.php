@@ -1,4 +1,5 @@
 <?php
+use System\Model\PurityModel\PurityModel;
 
 include "AbstractPage.class.php";
 
@@ -42,11 +43,11 @@ class ApiPage extends AbstractPage
             'resources' => $resources
         ];
 
-        require_once("system/AppCore.class.php");
-        $dbObj = AppCore::getDB();
+        $purity = new PurityModel();
+
         foreach($this->data['resources'] as $key => $resource)
         {
-            $dbObj->insertData($postaja, $polutant, $resource['vrijednost'], $resource['mjernaJedinica'], $resource['vrijeme']);
+            $purity->insertData($postaja, $polutant, $resource['vrijednost'], $resource['mjernaJedinica'], $resource['vrijeme']);
         }
     }
 

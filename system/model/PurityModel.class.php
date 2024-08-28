@@ -1,5 +1,8 @@
 <?php
 
+namespace System\Model\PurityModel;
+use System\Model\AbstractModel;
+
 class PurityModel extends AbstractModel
 {
     public function insertData ($station, $polutant, $val, $mesurements, $seconds) {

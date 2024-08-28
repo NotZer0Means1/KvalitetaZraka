@@ -1,6 +1,7 @@
 <?php
 
-
+namespace System\Model;
+use AppCore;
 
 abstract class AbstractModel
 {
@@ -14,7 +15,7 @@ abstract class AbstractModel
 
     public function sendQuery($request)
     {
-        $this->MySQLi->sendQuery($request);
+        return $this->MySQLi->sendQuery($request);
     }
 
 }

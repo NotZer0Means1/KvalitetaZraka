@@ -1,5 +1,8 @@
 <?php
 
+namespace System\Model\CityModel;
+use System\Model\AbstractModel;
+
 class CityModel extends AbstractModel
 {
     public function insertStation($id, $station, $passwrd) { // model postoja

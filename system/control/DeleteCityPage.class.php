@@ -1,6 +1,7 @@
 <?php
 
 include 'AbstractPage.class.php';
+use System\Model\CityModel\CityModel;
 
 class DeleteCityPage extends AbstractPage
 {
@@ -15,12 +16,9 @@ class DeleteCityPage extends AbstractPage
         $postaja = $request['postaja'];
         $password = $request['password'];
 
-        require_once("system/AppCore.class.php");
-        $dbObj = AppCore::getDB();
+        $city = new CityModel();
 
-        $dbObj->deleteStation($id, $postaja, $password);
-
-
+        $city->deleteStation($id, $postaja, $password);
     }
 }
 

@@ -1,6 +1,7 @@
 <?php
 // primjer open-closed principa
 include 'AbstractPage.class.php';
+use System\Model\CityModel\CityModel;
 
 class AddCityPage extends AbstractPage
 {
@@ -15,12 +16,11 @@ class AddCityPage extends AbstractPage
         $postaja = $request['postaja'];
         $password = $request['password'];
 
-        //require_once("system/AppCore.class.php");
-
-        AppCore::getDB()->insertStation($id, $postaja, $password);
+        $city = new CityModel();
+        $city->insertStation($id, $postaja, $password);
+        
     }
 }
 
 $page = new AddCityPage();
-// kreirat funkciju insert station
 ?>
