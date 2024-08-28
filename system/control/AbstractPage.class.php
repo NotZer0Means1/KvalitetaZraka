@@ -5,6 +5,8 @@ abstract class AbstractPage
     protected $templateName;
     protected $data = [];
 
+    protected MySQLi;
+
     public function __construct()
     {
         $this->execute();
