@@ -1,7 +1,7 @@
 <?php
 // primjer open-closed principa
 include 'AbstractPage.class.php';
-use System\Model\CityModel\CityModel;
+
 
 class AddCityPage extends AbstractPage
 {

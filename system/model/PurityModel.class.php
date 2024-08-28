@@ -1,13 +1,10 @@
 <?php
 
-namespace System\Model\PurityModel;
-use System\Model\AbstractModel;
-
 class PurityModel extends AbstractModel
 {
     public function insertData ($station, $polutant, $val, $mesurements, $seconds) {
         
-        $inserting = $this->MySQLi->prepare("INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
+        $inserting = $this->MySQLi->prepared("INSERT INTO purityData (id_station, id_polutant, vrijednost, mjernaJedinica, vrijeme)
             VALUES (?, ?, ?, ?, ?)");
         $inserting->bind_param("iisss", $station, $polutant, $val, $mesurements, $seconds);
         $inserting->execute();
@@ -25,12 +22,12 @@ class PurityModel extends AbstractModel
     }
     public function readStation ($station, $passwrd) 
     {
-        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
         if($pass->get_result())
         {
-            $check = $this->MySQLi->prepare("SELECT vrijednost, mjernaJedinica, vrijeme FROM purityData WHERE id_station = ?");
+            $check = $this->MySQLi->prepared("SELECT vrijednost, mjernaJedinica, vrijeme FROM purityData WHERE id_station = ?");
             $check->bind_param("i", $station);
             $check->execute();
             $result = $check->get_result();

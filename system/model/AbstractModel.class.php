@@ -1,7 +1,6 @@
 <?php
 
-namespace System\Model;
-use AppCore;
+include_once 'MySQLiDatabase.class.php';
 
 abstract class AbstractModel
 {
@@ -9,7 +8,7 @@ abstract class AbstractModel
 
     public function __construct()
     {
-        require_once("AppCore.class.php");
+        require_once("system/AppCore.class.php");
         $this->MySQLi = AppCore::getDB();
     }
 

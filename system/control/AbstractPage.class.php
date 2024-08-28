@@ -1,5 +1,6 @@
 <?php
 // open closed princip
+include 'system/model/CityModel.class.php';
 abstract class AbstractPage
 {
     protected $templateName;

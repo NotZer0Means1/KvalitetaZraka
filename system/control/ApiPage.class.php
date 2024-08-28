@@ -1,5 +1,5 @@
 <?php
-use System\Model\PurityModel\PurityModel;
+
 
 include "AbstractPage.class.php";
 

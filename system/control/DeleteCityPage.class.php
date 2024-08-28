@@ -1,7 +1,6 @@
 <?php
 
-include 'AbstractPage.class.php';
-use System\Model\CityModel\CityModel;
+
 
 class DeleteCityPage extends AbstractPage
 {

@@ -1,18 +1,24 @@
 <?php
 
-namespace System\Model\CityModel;
-use System\Model\AbstractModel;
+include_once 'AbstractModel.class.php';
+
 
 class CityModel extends AbstractModel
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
     public function insertStation($id, $station, $passwrd) { // model postoja
 
-        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
-        if($pass->get_result())
+        $passRes = $pass->get_result();
+        if($passRes->num_rows > 0)
         {
-            $insertStation = $this->MySQLi->prepare("INSERT INTO stations (id, station)
+            $insertStation = $this->MySQLi->prepared("INSERT INTO stations (id, station)
             VALUES (?, ?)");
             $insertStation ->bind_param("is", $id, $station);
             $insertStation -> execute();
@@ -21,16 +27,17 @@ class CityModel extends AbstractModel
     }
     public function updateStationName($id, $station, $passwrd) {
 
-        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
-        if($pass->get_result())
+        $passRes = $pass->get_result();
+        if($passRes->num_rows > 0)
         {
-            $checkname = $this->MySQLi->prepare("SELECT id FROM stations WHERE id = ?");
+            $checkname = $this->MySQLi->prepared("SELECT id FROM stations WHERE id = ?");
             $checkname -> bind_param("i", $id);
             $checkname -> execute();
             if($checkname->get_result()) {
-                $updatename = $this->MySQLi->prepare("UPDATE stations SET station = ? WHERE id = ?");
+                $updatename = $this->MySQLi->prepared("UPDATE stations SET station = ? WHERE id = ?");
                 $updatename -> bind_param("si", $station, $id);
                 $updatename -> execute();
             }
@@ -47,16 +54,17 @@ class CityModel extends AbstractModel
     }
     public function updateStationId($id, $station, $passwrd) {
 
-        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
-        if($pass->get_result())
+        $passRes = $pass->get_result();
+        if($passRes->num_rows > 0)
         {
-            $checkid = $this->MySQLi->prepare("SELECT id FROM stations WHERE station = ?");
+            $checkid = $this->MySQLi->prepared("SELECT id FROM stations WHERE station = ?");
             $checkid -> bind_param("s", $station);
             $checkid -> execute();
             if($checkid->get_result()) {
-                $updateid = $this->MySQLi->prepare("UPDATE stations SET id= ? WHERE station = ?");
+                $updateid = $this->MySQLi->prepared("UPDATE stations SET id= ? WHERE station = ?");
                 $updateid -> bind_param("is", $id, $station);
                 $updateid -> execute();
             }
@@ -64,20 +72,21 @@ class CityModel extends AbstractModel
     }
     public function deleteStation($id, $station, $passwrd) {
 
-        $pass = $this->MySQLi->prepare("SELECT passwrd FROM users WHERE passwrd = ?");
+        $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
-        if($pass->get_result())
+        $passRes = $pass->get_result();
+        if($passRes->num_rows > 0)
         {
-            $checkid = $this->MySQLi->prepare("SELECT id FROM stations WHERE id = ?");
+            $checkid = $this->MySQLi->prepared("SELECT id FROM stations WHERE id = ?");
             $checkid -> bind_param("i", $id);
             $checkid -> execute();
             if($checkid->get_result()){
-                $checkstation = $this->MySQLi->prepare("SELECT station FROM stations WHERE station = ?");
+                $checkstation = $this->MySQLi->prepared("SELECT station FROM stations WHERE station = ?");
                 $checkstation -> bind_param("s", $station);
                 $checkstation -> execute();
                 if($checkstation->get_result()) {
-                    $delete = $this->MySQLi->prepare("DELETE FROM stations WHERE id = ?");
+                    $delete = $this->MySQLi->prepared("DELETE FROM stations WHERE id = ?");
                     $delete -> bind_param("i", $id);
                     $delete -> execute();
                 }
@@ -86,7 +95,7 @@ class CityModel extends AbstractModel
     }
     public function getStations() {
         $getdata = "SELECT * FROM stations";
-        $sqldef = $this->MySQLi->prepare($getdata);
+        $sqldef = $this->MySQLi->prepared($getdata);
         $sqldef -> execute();
         $data = $sqldef -> get_result();
         $stations = [];

@@ -23,6 +23,9 @@ class MySQLiDatabase
     {
         $this->MySQLi = @new MySQLi($this->host, $this->user, $this->password, $this->database);
     }
+    public function prepared($query) {
+        return $this->MySQLi->prepare($query);
+    }
 
     public function sendQuery($query) 
     {
