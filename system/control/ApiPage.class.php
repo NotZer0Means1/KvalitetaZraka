@@ -1,6 +1,5 @@
 <?php
 
-
 include "AbstractPage.class.php";
 
 class ApiPage extends AbstractPage
@@ -48,6 +47,8 @@ class ApiPage extends AbstractPage
         {
             $purity->insertData($postaja, $polutant, $resource['vrijednost'], $resource['mjernaJedinica'], $resource['vrijeme']);
         }
+
+        
     }
 
 }

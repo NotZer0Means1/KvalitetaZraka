@@ -5,20 +5,20 @@ class PolutantsModel extends AbstractModel
     public function insertPolutants($id, $polutant, $passwrd) {
 
         $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        if ($this->sendQuery($check) == true) {
+        if ($this->MySQLi->sendQuery($check) == true) {
             $sql = "INSERT INTO polutants (id, polutant)
                 values ('$id', '$polutant')";
-            $this->sendQuery($sql);
+            $this->MySQLi->sendQuery($sql);
         }        
     }
     public function updatePolutantName($id, $polutant, $passwrd) {
 
         $check = "SELECT passwrd from users where passwrd='$passwrd'";
         $checkid = "SELECT id from polutants where id ='$id'";
-        if ($this->sendQuery($check) == true) {
-            if ($this->sendQuery($checkid) == true) {
+        if ($this->MySQLi->sendQuery($check) == true) {
+            if ($this->MySQLi->sendQuery($checkid) == true) {
                 $edit = "UPDATE polutants SET polutant='$polutant' where id='$id'";
-                $this->sendQuery($edit);
+                $this->MySQLi->sendQuery($edit);
             }
         }
     }
@@ -26,10 +26,10 @@ class PolutantsModel extends AbstractModel
 
         $check = "SELECT passwrd from users where passwrd='$passwrd'";
         $checkpolutant = "SELECT id from polutants where polutant ='$polutant'";
-        if ($this->sendQuery($check) == true) {
-            if ($this->sendQuery($checkpolutant) == true) {
+        if ($this->MySQLi->sendQuery($check) == true) {
+            if ($this->MySQLi->sendQuery($checkpolutant) == true) {
                 $edit = "UPDATE polutants SET id='$id' where polutant='$polutant'";
-                $this->sendQuery($edit);
+                $this->MySQLi->sendQuery($edit);
             }
         }
     }
@@ -39,16 +39,16 @@ class PolutantsModel extends AbstractModel
         $checkid = "SELECT id from polutants where id ='$id'";
         $checkpolutant = "SELECT polutant from polutants where polutant = '$polutant'";
         
-        if ($this->sendQuery($check) == true) {
-            if ($this->sendQuery($checkid) == true && $this->sendQuery($checkpolutant) == true) {
+        if ($this->MySQLi->sendQuery($check) == true) {
+            if ($this->MySQLi->sendQuery($checkid) == true && $this->MySQLi->sendQuery($checkpolutant) == true) {
                 $delete = "DELETE FROM polutants where id='$id'";
-                $this->sendQuery($delete);
+                $this->MySQLi->sendQuery($delete);
             }
         }
     }
     public function getPolutant() {
         $getdata = "SELECT * FROM polutants";
-        $data = $this->sendQuery($getdata);
+        $data = $this->MySQLi->sendQuery($getdata);
         $polutants = [];
         while($polutants = $data->fetch_row()) {
             $polutants[] = $polutants;

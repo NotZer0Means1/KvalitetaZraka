@@ -6,22 +6,18 @@ class CityModel extends AbstractModel
 {
 
     public function insertStation($id, $station, $passwrd) { // model postoja
-
         $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
         $passRes = $pass->get_result();
-        print '1';
         if($passRes->num_rows > 0)
         {
-            print '2';
             $insert = $this->MySQLi->prepared("INSERT INTO stations (id, station)
             VALUES (?, ?)");
             $insert ->bind_param("is", $id, $station);
             $insert -> execute();
             $insert -> close();
         }
-        print '3';
         $pass->close();
     }
     public function updateStationName($id, $station, $passwrd) {

@@ -19,19 +19,22 @@ class AppCore
     
         if(AppCore::$num<=1)
         {
-            echo "<br>FATAL ERROR exceptionHandle <br>";
+            $message = "FATAL ERROR exceptionHandle";
             require_once('view/Error.tpl.php');
             header("HTTP/1.1 404 NOT FOUND FATAL ERROR exceptionHandle");
+        }
+        else
+        {
+
         }
       
     }
     public static function errorExceptionHandle()
     {
-            $message = "greska";
-            AppCore::sendError($message);
-            echo "<br>ERROR WARNING errorExceptionHandle <br>";
-            require_once('view/Error.tpl.php');
-            header("HTTP/1.1 405 ERROR WARNING errorExceptionHandle");
+        $message = "ERROR WARNING errorExceptionHandle";
+        AppCore::sendError($message);
+        require_once('view/Error.tpl.php');
+        header("HTTP/1.1 405 ERROR WARNING errorExceptionHandle");
     }
 
     protected function initDB()

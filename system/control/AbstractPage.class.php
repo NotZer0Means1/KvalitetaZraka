@@ -1,6 +1,7 @@
 <?php
 // open closed princip
-include 'system/model/CityModel.class.php';
+include_once 'system/model/CityModel.class.php';
+include_once 'system/model/PurityModel.class.php';
 abstract class AbstractPage
 {
     protected $templateName;
