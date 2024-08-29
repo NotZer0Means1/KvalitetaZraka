@@ -1,7 +1,5 @@
 <?php
 
-include_once 'MySQLiDatabase.class.php';
-
 abstract class AbstractModel
 {
     protected $MySQLi;
@@ -10,11 +8,6 @@ abstract class AbstractModel
     {
         require_once("system/AppCore.class.php");
         $this->MySQLi = AppCore::getDB();
-    }
-
-    public function sendQuery($request)
-    {
-        return $this->MySQLi->sendQuery($request);
     }
 
 }

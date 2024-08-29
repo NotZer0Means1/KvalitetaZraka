@@ -2,13 +2,9 @@
 
 include 'AbstractPage.class.php';
 
-use System\Model\CityModel\CityModel;
-
 class UpdateCityNamePage extends AbstractPage
 {
     protected $templateName = 'UpdateCityName';
-
-    protected static $dbObj = null;
 
     public function execute()
     {

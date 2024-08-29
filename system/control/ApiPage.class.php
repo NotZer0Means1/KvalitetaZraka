@@ -6,7 +6,6 @@ include "AbstractPage.class.php";
 class ApiPage extends AbstractPage
 {
     protected $templateName = "Api";
-    protected $dbObj = null;
 
     public function execute()
     {

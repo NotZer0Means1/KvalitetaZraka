@@ -23,11 +23,17 @@ class MySQLiDatabase
     {
         $this->MySQLi = @new MySQLi($this->host, $this->user, $this->password, $this->database);
     }
+
+    public function sendQuery($request)
+    {
+        return $this->MySQLi->query($request);
+    }
+
     public function prepared($query) {
         return $this->MySQLi->prepare($query);
     }
 
-    public function sendQuery($query) 
+    public function sendInternalQuery($query) 
     {
         return $this->MySQLi->query($query);
     }
@@ -35,7 +41,7 @@ class MySQLiDatabase
     protected function checkExistance($name)
     {
         $query = "SHOW TABLES LIKE '$name'";
-        $result = $this->sendQuery($query);
+        $result = $this->sendInternalQuery($query);
         return $result;
     }
 
@@ -47,7 +53,7 @@ class MySQLiDatabase
     private function createDatabase() 
     {
         // $purityDB = "CREATE DATABASE '$this->database'";
-        // $this->sendQuery($purityDB);
+        // $this->sendInternalQuery($purityDB);
 
         if($this->checkExistance('users')->num_rows == 0)
         {
@@ -56,7 +62,7 @@ class MySQLiDatabase
                 username VARCHAR(30) NOT NULL,
                 passwrd VARCHAR(30) NOT NULL
             )";
-            $this->sendQuery($purityUser);
+            $this->sendInternalQuery($purityUser);
         }
 
         if($this->checkExistance('stations')->num_rows == 0)
@@ -65,7 +71,7 @@ class MySQLiDatabase
                 id INT(3) UNSIGNED PRIMARY KEY,
                 station VARCHAR(30) NOT NULL
             )";
-            $this->sendQuery($purityStations);
+            $this->sendInternalQuery($purityStations);
             $this->stationsDB();
         }
 
@@ -75,7 +81,7 @@ class MySQLiDatabase
                 id INT(3) UNSIGNED PRIMARY KEY,
                 polutant VARCHAR(30) NOT NULL
             )";
-            $this->sendQuery($purityType);
+            $this->sendInternalQuery($purityType);
             $this->typeDB();
         }
 
@@ -91,7 +97,7 @@ class MySQLiDatabase
                 FOREIGN KEY (id_station) REFERENCES stations(id),
                 FOREIGN KEY (id_polutant) REFERENCES polutants(id)
             )";
-            $this->sendQuery($purityData);
+            $this->sendInternalQuery($purityData);
         }
     }
 
@@ -112,7 +118,7 @@ class MySQLiDatabase
         foreach($stations as $key => $value) {
             $sql = "INSERT INTO stations (id, station)
                 VALUES ('$key', '$value')";
-            $this->sendQuery($sql);
+            $this->sendInternalQuery($sql);
         }
     }
 
@@ -128,7 +134,7 @@ class MySQLiDatabase
         foreach($polutants as $key => $value) {
             $sql = "INSERT INTO polutants (id, polutant)
                 VALUES ('$key', '$value')";
-            $this->sendQuery($sql);
+            $this->sendInternalQuery($sql);
         }
     }
 }

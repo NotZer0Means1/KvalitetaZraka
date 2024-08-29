@@ -13,7 +13,7 @@ class PurityModel extends AbstractModel
     }
     public function getData() {
         $getData = "SELECT * FROM purityData";
-        $data = $this->sendQuery($getData);
+        $data = $this->MySQLi->sendQuery($getData);
         $fullData = [];
         while($fullData = $data->fetch_row()) {
             $fullData[] = $fullData;
@@ -40,9 +40,11 @@ class PurityModel extends AbstractModel
                     'vrijeme'=> htmlspecialchars($row['vrijeme'])
                 ];
             }
-            return $finalres;
-
+            $check->close();
         }
+        $pass->close();
+
+        return $finalres;
     }
 }
 ?>

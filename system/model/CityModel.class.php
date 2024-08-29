@@ -2,28 +2,27 @@
 
 include_once 'AbstractModel.class.php';
 
-
 class CityModel extends AbstractModel
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
     public function insertStation($id, $station, $passwrd) { // model postoja
 
         $pass = $this->MySQLi->prepared("SELECT passwrd FROM users WHERE passwrd = ?");
         $pass -> bind_param("s", $passwrd);
         $pass->execute();
         $passRes = $pass->get_result();
+        print '1';
         if($passRes->num_rows > 0)
         {
-            $insertStation = $this->MySQLi->prepared("INSERT INTO stations (id, station)
+            print '2';
+            $insert = $this->MySQLi->prepared("INSERT INTO stations (id, station)
             VALUES (?, ?)");
-            $insertStation ->bind_param("is", $id, $station);
-            $insertStation -> execute();
-            $insertStation -> close();
-        }     
+            $insert ->bind_param("is", $id, $station);
+            $insert -> execute();
+            $insert -> close();
+        }
+        print '3';
+        $pass->close();
     }
     public function updateStationName($id, $station, $passwrd) {
 
@@ -40,15 +39,19 @@ class CityModel extends AbstractModel
                 $updatename = $this->MySQLi->prepared("UPDATE stations SET station = ? WHERE id = ?");
                 $updatename -> bind_param("si", $station, $id);
                 $updatename -> execute();
+                $updatename->close();
             }
+            $checkname->close();
         }
+
+        $pass->close();
 
         $check = "SELECT passwrd from users where passwrd='$passwrd'";
         $checkid = "SELECT id from stations where id ='$id'";
-        if ($this->sendQuery($check) == true) {
-            if ($this->sendQuery($checkid) == true) {
+        if ($this->MySQLi->sendQuery($check) == true) {
+            if ($this->MySQLi->sendQuery($checkid) == true) {
                 $edit = "UPDATE stations SET station='$station' where id='$id'";
-                $this->sendQuery($edit);
+                $this->MySQLi->sendQuery($edit);
             }
         }
     }
@@ -67,8 +70,10 @@ class CityModel extends AbstractModel
                 $updateid = $this->MySQLi->prepared("UPDATE stations SET id= ? WHERE station = ?");
                 $updateid -> bind_param("is", $id, $station);
                 $updateid -> execute();
+                $updateid->close();
             }
         }
+        $pass->close();
     }
     public function deleteStation($id, $station, $passwrd) {
 
@@ -89,9 +94,13 @@ class CityModel extends AbstractModel
                     $delete = $this->MySQLi->prepared("DELETE FROM stations WHERE id = ?");
                     $delete -> bind_param("i", $id);
                     $delete -> execute();
+                    $delete->close();
                 }
+                $checkstation->close();
             }
+            $checkid->close();
         }
+        $pass->close();
     }
     public function getStations() {
         $getdata = "SELECT * FROM stations";
@@ -105,6 +114,7 @@ class CityModel extends AbstractModel
             }, $stations);
             $stations[] = $xssdef;
         }
+        $sqldef->close();
         return $stations;
     }
 }

@@ -1,12 +1,10 @@
 <?php
 
-
+include_once 'AbstractPage.class.php';
 
 class DeleteCityPage extends AbstractPage
 {
     protected $templateName = 'DeleteCity';
-
-    protected static $dbObj = null;
 
     public function execute()
     {

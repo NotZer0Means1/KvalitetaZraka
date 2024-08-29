@@ -1,13 +1,10 @@
 <?php
 // primjer open-closed principa
-include 'AbstractPage.class.php';
-
+include_once 'AbstractPage.class.php';
 
 class AddCityPage extends AbstractPage
 {
     protected $templateName = 'AddCity';
-
-    protected static $dbObj = null;
 
     public function execute()
     {

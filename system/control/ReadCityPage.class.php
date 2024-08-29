@@ -2,12 +2,9 @@
 
 include 'AbstractPage.class.php';
 
-use System\Model\PurityModel\PurityModel;
 class ReadCityPage extends AbstractPage
 {
     protected $templateName = 'ReadCity';
-
-    protected static $dbObj = null;
 
     public function execute()
     {
