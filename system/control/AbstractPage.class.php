@@ -1,5 +1,5 @@
 <?php
-// open closed princip
+// dependency inversion primjer
 include_once 'system/model/CityModel.class.php';
 include_once 'system/model/PurityModel.class.php';
 abstract class AbstractPage
@@ -22,15 +22,6 @@ abstract class AbstractPage
         include_once("system/view/{$template}.tpl.php");
     }
 
-    public function printJSON($data)
-    {
-        return json_encode($data);
-    }
-
-    public function printXML($data)
-    {
-
-    }
 }
 
 ?>

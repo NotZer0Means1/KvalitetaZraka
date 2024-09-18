@@ -41,15 +41,6 @@ class CityModel extends AbstractModel
         }
 
         $pass->close();
-
-        $check = "SELECT passwrd from users where passwrd='$passwrd'";
-        $checkid = "SELECT id from stations where id ='$id'";
-        if ($this->MySQLi->sendQuery($check) == true) {
-            if ($this->MySQLi->sendQuery($checkid) == true) {
-                $edit = "UPDATE stations SET station='$station' where id='$id'";
-                $this->MySQLi->sendQuery($edit);
-            }
-        }
     }
     public function updateStationId($id, $station, $passwrd) {
 

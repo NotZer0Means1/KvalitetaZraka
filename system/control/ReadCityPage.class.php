@@ -16,6 +16,10 @@ class ReadCityPage extends AbstractPage
         $city = new PurityModel();
 
         $resources = $city->readStation($id, $password);
+        
+        // fake test
+        // $fakeresources = $city->readFakeStation();
+
         if ($method == 'json')
             $resources = $this->printJSON($resources);
         else
@@ -23,6 +27,21 @@ class ReadCityPage extends AbstractPage
         $this -> data = [
             'resources' => $resources
         ];
+
+        // fake ispis
+        // $this->data = [
+        //     'resources' => $fakeresources
+        // ];
+    }
+
+    public function printJSON($data)
+    {
+        return json_encode($data);
+    }
+
+    public function printXML($data)
+    {
+
     }
 }
 

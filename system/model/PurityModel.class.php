@@ -46,5 +46,26 @@ class PurityModel extends AbstractModel
 
         return $finalres;
     }
+
+    public function readFakeStation ()
+    {
+        $fakeData = [[
+            'vrijednost' => 1,
+            'mjernaJedinica' => "cm",
+            'vrijeme' => 123456
+        ],
+        [
+            'vrijednost' => 2,
+            'mjernaJedinica' => "cm",
+            'vrijeme' => 654321
+        ],
+        [
+            'vrijednost' => 3,
+            'mjernaJedinica' => "cm",
+            'vrijeme' => 7777
+        ]];
+        $fakeData = json_encode(['data' => $fakeData], JSON_PRETTY_PRINT);
+        return $fakeData;
+    }
 }
 ?>
